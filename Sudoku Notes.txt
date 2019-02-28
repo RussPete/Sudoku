@@ -1,0 +1,60 @@
+Solve a Sudoku puzzle where the initial state is defined by the contents of a text file with row, column and value on each line of the file. 
+When finished, show the results as a 9 x 9 table on the console.
+
+Ultimate solution, build a node.js server hit that will solve the puzzle, build a client that will display the 9x9 grid, allow the user to 
+enter the initial values and send them to the server, displaying the solved puzzle when the server responds.
+
+First attempt. 
+
+Define a Cell class to contain information about a cell in the table
+    value, 
+    initialValueFlag
+    [9] array of flags for potential values
+    
+Define a Square class containing a 3x3 grid of Cells
+    [3, 3] array of Cells
+    
+Define a Puzzle class containing a 3x3 grid of Squares
+    Need a function for finding a Cell given the over all row and column in the puzzle
+    
+populate the Puzzle with the initial values
+for each cell in the puzzle
+    set the potential value flags to true
+    clear the flags for the final values found in the the cell's square, row and column
+    
+fValueFound = true
+while fValueFound
+    fValueFound = false
+    for each cell in the puzzle
+        fValueFound |= checkCell
+if solvedPuzzle
+    showPuzzle
+else
+    unsolvable puzzle
+end
+        
+checkCell
+    fValueFound = false
+    if there is only 1 potential value
+        set the value to the potential value
+        clear the potential values
+        for each cell in the cell's square
+            fValueFound |= clearPotentialValue(value)
+        for each cell in the cell's row
+            fValueFound |= clearPotentialValue(value)
+        for each cell in the cell's column
+            fValueFound |= clearPotentialValue(value)
+    return fValueFound
+
+clearPotentialValue(value)
+    clear the value from the potential values
+    return checkCell
+    
+solvedPuzzle
+    fSolved = true
+    for each cell
+        if cell doesn't have a value
+            fSolved = false
+    return fSolved
+    
+    
